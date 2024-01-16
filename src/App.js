@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Demo from './components/Demo';
+import Login from './components/Login';
+import Registration from './components/Registration';
+import AddNews from './components/Addnews';
+import Navbar from './components/Navbar';
+import Games from './components/Games'
+
 
 function App() {
+
+  const {me,user} = useAuth();
+    console.log(user)
+
+  useEffect(() => {
+      const token = localStorage.getItem("token");
+      setupAxios(token);
+      if (token) {
+          me(token);
+     }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+       <QueryClientProvider client={queryClient}>
+      <div className="App">
+        {/*<Navbar />*/}
+          <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/rejestracja" element={<Registration />} />
+          <Route path="/stronaglowna" element={<Demo />} />
+          <Route path='/dodajnews' element={<AddNews/>} />
+          <Route path='/mecze' element={<Games/>} />
+        </Routes>
+      </BrowserRouter>
+    );
 }
 
 export default App;

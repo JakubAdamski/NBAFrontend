@@ -1,38 +1,241 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  background-color: #1D428A;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  
+  height: 100vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+}
+
+.white-container {
+  height: 100vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: white; 
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+}
+
+
+.card input {
+  border-radius: 10px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+
+.navbar {
+  background-color: black;
   color: white;
+  padding: 10px 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-logo {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
 }
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.navbar-search input {
+  padding: 8px;
+  border-radius: 20px;
+  border: 1
+}
+
+  /* Navbar.css */
+  .navbar {
+    background-color: #000; 
+    color: #fff; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+  .navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%; 
+  }
+
+  .nav-link {
+    color: #fff; 
+    text-decoration: none; 
+    margin: 0 20px; 
+    padding: 10px 0; 
+    font-size: 16px; 
+    font-weight: bold; 
+  }
+
+  .nav-link:hover {
+    color: #e0e0e0;
+  }
+
+ 
+  body {
+    padding-top: 60px; 
+  }
+
+  .logout-button {
+    margin-left: auto; 
+    background: none; 
+    border: none; 
+    color: #fff; 
+    cursor: pointer; 
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .logout-button:hover {
+    color: #e0e0e0; 
+  }
+
+  .add-news-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100vh;
+  }
+  
+  .news-card {
+    width: 100%; 
+    margin: 2rem 0; 
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
+    background: #fff; 
+  }
+  
+  .news-input,
+  .news-textarea,
+  .news-submit {
+    width: 100%;
+    margin-bottom: 1rem; 
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .news-textarea {
+    height: 300px;
+  }
+  
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .news-item {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    width: 150vh;
+  }
+  
+  .news-details {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .news-details button {
+    cursor: pointer;
+  }
+  
+  .news-author {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .games-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    width: 300px;
+  }
+  
+  .game-time {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .team {
+    display: flex;
+    align-items: center;
+  }
+  
+  .team img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .team span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
