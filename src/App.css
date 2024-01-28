@@ -1,5 +1,4 @@
 body {
-  background-color: #1D428A;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,9 +42,13 @@ body {
   height: 30px;
   margin-bottom: 10px;
 }
-
-
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 10;
   background-color: black;
   color: white;
   padding: 10px 20px;
@@ -77,44 +80,6 @@ body {
   margin: 0 10px;
   font-weight: bold;
 }
-
-.navbar-search input {
-  padding: 8px;
-  border-radius: 20px;
-  border: 1
-}
-
-  /* Navbar.css */
-  .navbar {
-    background-color: #000; 
-    color: #fff; 
-    position: fixed; 
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-  }
-
-  .navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    width: 100%; 
-  }
-
-  .nav-link {
-    color: #fff; 
-    text-decoration: none; 
-    margin: 0 20px; 
-    padding: 10px 0; 
-    font-size: 16px; 
-    font-weight: bold; 
-  }
-
-  .nav-link:hover {
-    color: #e0e0e0;
-  }
 
  
   body {
@@ -149,6 +114,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     border-radius: 10px; 
     background: #fff; 
+    box-shadow: 0 2px 4px rgba(201, 8, 42, 0.5);
   }
   
   .news-input,
@@ -164,32 +130,48 @@ body {
     height: 300px;
   }
   
+  
 
   .news-list {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   
   .news-item {
-    margin: 10px 0;
+    width: calc(20% - 20px);
+    margin: 10px;
     padding: 10px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     cursor: pointer;
-    width: 150vh;
   }
   
-  .news-details {
-    margin-top: 20px;
+  .news-item {
+    width: calc(20% - 20px);
+    margin: 10px;
     padding: 10px;
     background-color: white;
+    border: 2px solid transparent; /* Ustalamy obwódkę jako przezroczystą, aby nie dublować obwódki z cieniem */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(201, 8, 42, 0.5); /* Kolor cienia #C9082A */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
   }
+  
+  .news-item:hover {
+    background-color: #17408B;
+    color: white;
+  }
+  
   
   .news-details button {
     cursor: pointer;
@@ -200,27 +182,56 @@ body {
     font-weight: bold;
   }
   
-  .games-container {
+  .games-display-container {
+    position: relative;
+    top: 60px; /* Dostosowanie, aby karuzela była zaraz pod paskiem nawigacyjnym */
+    width: 100%;
+    overflow: hidden; /* Usunięcie scrolla */
+    z-index: 5; 
+  }
+  
+  .games-scroll-container {
     display: flex;
-    justify-content: space-around;
-    padding: 20px;
+    flex-wrap: nowrap;
   }
   
   .game-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 10px;
-    width: 300px;
+    margin: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: calc(100% / 5 - 20px); /* Dostosowanie szerokości karty */
+    box-sizing: border-box;
   }
   
-  .game-time {
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #666;
+  .scroll-button {
+    background-color: grey;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .scroll-button.left {
+    left: -20px;
+  }
+  
+  .scroll-button.right {
+    right: 10px;
+  }
+  
+  .scroll-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
   
   .team {
@@ -229,13 +240,57 @@ body {
   }
   
   .team img {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     margin-right: 10px;
   }
   
   .team span {
     font-size: 18px;
     font-weight: bold;
+    padding: 10px;
   }
   
+  .user-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1vh;
+  }
+  .manage-user-container {
+    width: 100%; /* Tabela będzie zajmować 100% szerokości kontenera */
+    margin: 0 auto; /* Centrowanie tabeli */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Dodanie cienia dla lepszego efektu */
+    border-collapse: collapse; /* Usunięcie podwójnych ramek */
+    overflow-x: auto; /* Włączenie przewijania poziomego jeśli tabela jest szersza niż ekran */
+}
+
+.manage-user-container .table {
+    width: 100%; /* Szerokość tabeli */
+    border-collapse: collapse; /* Usunięcie podwójnych ramek */
+}
+
+.manage-user-container th,
+.manage-user-container td {
+    padding: 12px 15px; /* Dodanie paddingu do komórek */
+    border: 1px solid #ddd; /* Dodanie ramki dookoła komórek */
+    text-align: left; /* Wyrównanie tekstu do lewej */
+}
+
+.manage-user-container th {
+    background-color: #f4f4f4; /* Kolor tła dla nagłówków */
+    color: #333; /* Kolor tekstu dla nagłówków */
+}
+
+.manage-user-container tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternatywne kolory tła dla rzędów */
+}
+
+.manage-user-container tr:hover {
+    background-color: #f1f1f1; /* Kolor tła przy najechaniu kursorem */
+}
+
+.manage-user-container .btn {
+    margin-right: 5px; /* Odstęp między przyciskami */
+    /* Możesz również dodać dodatkowe style dla przycisków */
+}

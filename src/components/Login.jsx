@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+import '../App.css';
 
 function Login() {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
-   const { login } = useAuth(); 
+   const { login } = useAuth();
    const navigate = useNavigate();
 
    async function loginHandler(event) {
@@ -20,8 +21,8 @@ function Login() {
          console.log(response.data);
 
          if (response.data.token) {
-            login(response.data.token); 
-            navigate('/stronaglowna'); 
+            login(response.data.token);
+            navigate('/stronaglowna');
          } else {
             alert('Nieprawidłowy token lub brak tokenu w odpowiedzi');
          }
@@ -31,9 +32,10 @@ function Login() {
       }
    }
 
+
    return (
       <div className="white-container">
-         <div className="login-form">
+         <div className="login-form shadow">
             <h2 className="text-center">Logowanie</h2>
             <form onSubmit={loginHandler}>
                <div className="form-group mb-3">

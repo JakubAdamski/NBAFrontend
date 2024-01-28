@@ -1,0 +1,66 @@
+.groups-view {
+  display: flex;
+  height: calc(100vh - 2cm); /* Wysokość ekranu minus margines na górze */
+  margin-top: 2cm; /* Margines na górze */
+}
+
+.main-content {
+  display: flex;
+  width: 100%; /* Pełna szerokość kontenera */
+}
+
+.groups-section {
+  width: 20%; /* Szerokość sekcji grup */
+  padding: 10px;
+  overflow-y: auto; /* Przewijanie pionowe */
+  height: 100%; /* Pełna dostępna wysokość */
+}
+
+.posts-section {
+  width: 80%; /* Szerokość sekcji postów */
+  padding: 10px;
+  overflow-y: auto; /* Przewijanie pionowe */
+  display: flex;
+  flex-direction: column; /* Elementy ułożone kolumnowo */
+}
+
+.post {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* Możesz dodać więcej stylów dla kafelka posta */
+}
+
+.create-post-section {
+  padding: 10px 0;
+  border-radius: 4px;
+  background-color: #f8f9fa; /* Lekkie tło */
+  margin-top: auto; /* Przycisk 'Dodaj post' przyklejony do dołu */
+}
+
+.create-post-section textarea {
+  width: 100%; /* Pełna szerokość kontenera */
+  margin-bottom: 10px; /* Odstęp od przycisku */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  /* Stylizacja pola tekstowego */
+}
+
+.create-post-section button {
+  padding: 10px 20px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  /* Stylizacja przycisku */
+}
+
+/* Stylizacja dla wybranej grupy */
+.group.selected {
+  background-color: #e9ecef;
+  border-color: #007bff;
+}

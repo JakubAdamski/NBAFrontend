@@ -1,6 +1,6 @@
-import React, {createContext, useState, useEffect, useContext} from "react";
-import {api} from "./api/ApiServices";
-import {axiosConfig, setupAxios} from "setupAxios";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { api } from "./ApiServices";
+import { axiosConfig, setupAxios } from "./setupAxios";
 
 export const UserContext = createContext({
     token: '',
@@ -15,7 +15,7 @@ export const UserContext = createContext({
 
 export const useAuth = () => useContext(UserContext);
 
-export const UserProvider = ({children}) => {
+export const UserProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
 
@@ -56,7 +56,7 @@ export const UserProvider = ({children}) => {
         saveTokenToLocalStorage(token);
         me(token);
         console.log(token);
-        window.location.reload(false);
+        // window.location.reload(false);
     };
 
     const logout = () => {

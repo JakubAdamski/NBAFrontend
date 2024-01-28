@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import "../App.css"; // Załóżmy, że ten import jest już w miejscu
+import "../App.css";
 
 function AddNews() {
   const [title, setTitle] = useState("");
