@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import '../App.css';
 import { GameSlider } from './home/GameSlider';
-import {Stack} from "@mantine/core";
+import {Card, SimpleGrid, Stack} from "@mantine/core";
 const fetchNews = async () => {
   try {
     const result = await axios.get('http://localhost:8080/news');
@@ -106,32 +106,27 @@ const Demo = () => {
              </motion.div>
          )}
        </AnimatePresence>
-       <div className="news-list">
+       <SimpleGrid cols={3} spacing={'xs'}>
          {newsList.map(news => (
              <motion.div
                  key={news.id}
-                 className="news-item"
                  layout
                  initial={{ opacity: 0.5 }}
                  animate={{ opacity: 1 }}
-                 whileHover={{ scale: 1.03, backgroundColor: "#17408B" }}
+                 // whileHover={{ scale: 1.03, backgroundColor: "#17408B" }}
                  onClick={() => selectNews(news)}
-                 style={{
-                   margin: '1rem',
-                   padding: '1rem',
-                   borderRadius: '1rem',
-                   boxShadow: '0px 10px 30px #C9082A',
-                   backgroundColor: 'white',
-                   width: '300px',
-                   minHeight: '200px',
-                 }}
+                 style={{height:'100%', cursor:'pointer'}}
              >
-               <h3>{news.title}</h3>
-               <div className="news-author">
-                 Autor: {news.author}</div>
+               <Card shadow={'md'} h={'100%'} radius={'lg'} >
+                 <Stack justify={'space-between'}h={'100%'}>
+                   <h3>{news.title}</h3>
+
+                    <p>Autor: {news.author}</p>
+                 </Stack>
+               </Card>
              </motion.div>
          ))}
-       </div>
+       </SimpleGrid>
      </Stack>
     </div>
   );

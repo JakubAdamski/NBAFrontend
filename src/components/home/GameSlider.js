@@ -5,7 +5,8 @@ import axios from 'axios';
 import {setupAxios} from "../setupAxios";
 import {useAuth} from "../AuthContext";
 import {Carousel} from "@mantine/carousel";
-import {Card} from "@mantine/core";
+import {ActionIcon, Card, Group, SimpleGrid} from "@mantine/core";
+import {TbArrowBigLeftFilled, TbArrowBigRightFilled} from "react-icons/tb";
 
 export const GameSlider = () => {
     const [games, setGames] = useState([]);
@@ -28,34 +29,56 @@ export const GameSlider = () => {
         fetchGames();
     }, [token]); // Dodaj token do zależności useEffect
 
-    const visibleGames = games.slice(currentIndex, currentIndex + 5);
+    const visibleGames = games.slice(currentIndex, currentIndex + 3);
 
     const showNextGames = () => {
-        setCurrentIndex((prevIndex) => Math.min(prevIndex + 5, games.length - 5));
+        setCurrentIndex((prevIndex) => Math.min(prevIndex + 2, games.length - 5));
     };
 
     const showPreviousGames = () => {
-        setCurrentIndex((prevIndex) => Math.max(prevIndex - 5, 0));
+        setCurrentIndex((prevIndex) => Math.max(prevIndex - 2, 0));
     };
 
-    return (
-        <div className="games-display-container">
-            <button className="scroll-button left" onClick={showPreviousGames} disabled={currentIndex === 0}>{"<"}</button>
-            <div className="games-scroll-container">
-                {visibleGames.map((game) => (
-                    <div key={game.id} className="game-card">
-                        <div className="game-time">{game.gameDate}</div>
-                        <div className="team">
-                            <img src={game.visitorTeamLogoUrl} alt={game.visitorTeamName} />
-                            <span>{game.visitorTeamPoints}</span>
-                            <span>{game.homeTeamPoints}</span>
-                            <img src={game.homeTeamLogoUrl} alt={game.homeTeamName} />
-                        </div>
+    // return (
+    //     <div className="games-display-container">
+    //         <button className="scroll-button left" onClick={showPreviousGames} disabled={currentIndex === 0}>{"<"}</button>
+    //         <div className="games-scroll-container">
+    //             {visibleGames.map((game) => (
+    //                 <div key={game.id} className="game-card">
+    //                     <div className="game-time">{game.gameDate}</div>
+    //                     <div className="team">
+    //                         <img src={game.visitorTeamLogoUrl} alt={game.visitorTeamName} />
+    //                         <span>{game.visitorTeamPoints}</span>
+    //                         <span>{game.homeTeamPoints}</span>
+    //                         <img src={game.homeTeamLogoUrl} alt={game.homeTeamName} />
+    //                     </div>
+    //                 </div>
+    //             ))}
+    //         </div>
+    //         <button className="scroll-button right" onClick={showNextGames} disabled={currentIndex + 5 >= games.length}>{">"}</button>
+    //     </div>
+    // );
+    return <Group position={'center'} align={'center'} >
+        <ActionIcon variant={'outline'} onClick={showPreviousGames}>
+            <TbArrowBigLeftFilled />
+        </ActionIcon>
+        <SimpleGrid cols={3}>
+            {visibleGames.map((game) => (
+                <Card key={game.id} shadow={'md'} radius={'lg'}>
+                    <div className="game-time">{game.gameDate}</div>
+                    <div className="team">
+                        <img src={game.visitorTeamLogoUrl} alt={game.visitorTeamName} />
+                        <span>{game.visitorTeamPoints}</span>
+                        <span>-</span>
+                        <span>{game.homeTeamPoints}</span>
+                        <img src={game.homeTeamLogoUrl} alt={game.homeTeamName} />
                     </div>
-                ))}
-            </div>
-            <button className="scroll-button right" onClick={showNextGames} disabled={currentIndex + 5 >= games.length}>{">"}</button>
-        </div>
-    );
+                </Card>
+            ))}
+        </SimpleGrid>
+        <ActionIcon variant={'outline'} onClick={showNextGames}>
+            <TbArrowBigRightFilled />
+        </ActionIcon>
+    </Group>
 
 }
