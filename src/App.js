@@ -14,6 +14,8 @@ import { setupAxios } from './components/setupAxios';
 import MUser from './components/MUser';
 import Logout from './components/Logout';
 import './App.css';
+import Groups from "./components/groups/./Groups";
+import {Box, Container} from "@mantine/core";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,7 @@ function App() {
        <QueryClientProvider client={queryClient}>
       <div className="App">
         <Navbar />
+          <Box mx={'md'} mt={100}>
           <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/rejestracja" element={<Registration />} />
@@ -42,8 +45,9 @@ function App() {
           <Route path='/mecze' element={<Games/>} />
           <Route path='/users' element={<MUser/>} />
           <Route path='/logout' element={<Logout/>} />
-          <Route path='/grupy' element={<GroupsView/>} />
+          <Route path='/grupy' element={<Groups/>} />
         </Routes>
+          </Box>
         </div>
       </QueryClientProvider>
     );
