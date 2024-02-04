@@ -2,6 +2,8 @@ body {
   height: 100vh;
   margin: 0;
   background-color: #e2e5e5 !important;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .login-container {
@@ -101,7 +103,7 @@ body {
 .add-news-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   width: 100vh;
 }
 
@@ -253,6 +255,7 @@ body {
 .user-container{
   display: flex;
   justify-content: center;
+
   align-items: center;
   width: 1vh;
 }

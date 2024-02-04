@@ -10,6 +10,7 @@ function Registration() {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [age, setAge] = useState("");
+   const [color, setColor] = useState("");
    const navigate = useNavigate();
 
    async function save(event) {
@@ -22,6 +23,7 @@ function Registration() {
             email: email,
             password: password,
             age: age,
+            color: color,
          });
          alert("Użytkownik zarejestrowany pomyślnie");
          navigate('/')
@@ -39,85 +41,97 @@ function Registration() {
             <form>
                <div className="form-group">
                   <input
-                     type="text"
-                     className="form-control"
-                     id="firstname"
-                     placeholder="Imię"
-                     value={firstname}
-                     onChange={(event) => {
-                        setFirstname(event.target.value);
-                     }}
+                      type="text"
+                      className="form-control"
+                      id="firstname"
+                      placeholder="Imię"
+                      value={firstname}
+                      onChange={(event) => {
+                         setFirstname(event.target.value);
+                      }}
                   />
                </div>
                <div className="form-group">
                   <input
-                     type="text"
-                     className="form-control"
-                     id="lastname"
-                     placeholder="Nazwisko"
-                     value={lastname}
-                     onChange={(event) => {
-                        setLastname(event.target.value);
-                     }}
-                  />
-               </div>
-
-               <div className="form-group">
-                  <input
-                     type="text"
-                     className="form-control"
-                     id="nickname"
-                     placeholder="Nickname"
-                     value={nickname}
-                     onChange={(event) => {
-                        setNickname(event.target.value);
-                     }}
+                      type="text"
+                      className="form-control"
+                      id="lastname"
+                      placeholder="Nazwisko"
+                      value={lastname}
+                      onChange={(event) => {
+                         setLastname(event.target.value);
+                      }}
                   />
                </div>
 
                <div className="form-group">
                   <input
-                     type="email"
-                     className="form-control"
-                     id="email"
-                     placeholder="Email"
-                     value={email}
-                     onChange={(event) => {
-                        setEmail(event.target.value);
-                     }}
+                      type="text"
+                      className="form-control"
+                      id="nickname"
+                      placeholder="Nickname"
+                      value={nickname}
+                      onChange={(event) => {
+                         setNickname(event.target.value);
+                      }}
                   />
                </div>
 
                <div className="form-group">
                   <input
-                     type="password"
-                     className="form-control"
-                     id="password"
-                     placeholder="Hasło"
-                     value={password}
-                     onChange={(event) => {
-                        setPassword(event.target.value);
-                     }}
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(event) => {
+                         setEmail(event.target.value);
+                      }}
                   />
                </div>
 
                <div className="form-group">
                   <input
-                     type="number"
-                     className="form-control"
-                     id="age"
-                     placeholder="Wiek"
-                     value={age}
-                     onChange={(event) => {
-                        setAge(event.target.value);
-                     }}
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      placeholder="Hasło"
+                      value={password}
+                      onChange={(event) => {
+                         setPassword(event.target.value);
+                      }}
+                  />
+               </div>
+
+               <div className="form-group">
+                  <input
+                      type="number"
+                      className="form-control"
+                      id="age"
+                      placeholder="Wiek"
+                      value={age}
+                      onChange={(event) => {
+                         setAge(event.target.value);
+                      }}
+                  />
+               </div>
+               <div className="form-group">
+                  <label htmlFor="color">Ulubiony kolor:</label>
+                  <input
+                      type="color"
+                      className="form-control"
+                      id="color"
+                      value={color}
+                      onChange={(event) => {
+                         setColor(event.target.value);
+                      }}
                   />
                </div>
 
                <button
-                  type="submit"
-                  className="btn btn-primary mt-4"
-                  onClick={save}
+                   type="submit"
+                   className="btn btn-primary mt-4"
+                   onClick={save}
                >
                   Zarejestruj
                </button>

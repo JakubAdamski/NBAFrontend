@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery} from "@tanstack/react-query";
 import axios from "axios";
 import {
+    ActionIcon,
     Avatar,
     Button,
     Card, Divider,
@@ -14,6 +15,8 @@ import {
     TypographyStylesProvider
 } from "@mantine/core";
 import {useForm} from "react-hook-form";
+import {useAuth} from "../AuthContext";
+import {TbMinus, TbPlus} from "react-icons/tb";
 
 const getAssociations = ()=>{
     return  axios.get('http://localhost:8080/associations').then(({data})=>data)
@@ -28,7 +31,13 @@ const addComment = (data)=>{
 
 }
 
+const joinGroup = (data)=> axios.post(`http://localhost:8080/user/joinGroup`,data).then(({data})=>data)
+const leaveGroup = (data)=> axios.post(`http://localhost:8080/user/leaveGroup`,data).then(({data})=>data)
+
 const Groups = () => {
+    const { user } = useAuth()
+    const userId =user ? user.id : null
+    console.log(userId)
     const [activeGroup, setActiveGroup] = useState();
     const[openedNewGroupModal, setOpenedNewGroupModal] = useState(false)
 
@@ -40,6 +49,20 @@ const Groups = () => {
         queryKey:['posts'],
         queryFn:getPosts
     })
+
+    const joinGroupMutation = useMutation(joinGroup,{
+        onSuccess:()=>{
+            refetchGroup()
+        }
+    })
+
+    const leaveGroupMutation = useMutation(leaveGroup,{
+        onSuccess:()=>{
+            refetchGroup()
+        }
+    })
+
+
 
 
 
@@ -74,11 +97,13 @@ const Groups = () => {
       <>
           <Tabs variant={'pills'} styles={()=>({
               tab:{
-                  fontSize:'24px',
+                  fontSize:'16px',
                   display: 'flex',
                   borderRadius: 5,
-                  padding: 12,
-                  flexGap: 20,
+                  paddingContentVertical: 9,
+                  flexGap: 10,
+                  fontWeight:500,
+
 
               },
               tabsList: {
@@ -86,7 +111,7 @@ const Groups = () => {
                   marginRight: 20,
                   padding: 10,
                   flexDirection: 'column',
-                  gap:10,
+
                   backgroundColor: '#fff',
                   height: 'fit-content',
                   borderRadius: 10,
@@ -95,10 +120,22 @@ const Groups = () => {
 
           })} onTabChange={setActiveGroup} placement={'right'} orientation={'vertical'} defaultValue={data[0].id.toString()}>
               <Tabs.List>
-                  <Button variant={"outline"} size={'lg'} onClick={()=>{setOpenedNewGroupModal(true)}}>Dodaj nową</Button>
+                  <Button variant={"outline"} mb={'xs'} size={'lg'} onClick={()=>{setOpenedNewGroupModal(true)}}>Dodaj nową</Button>
                   {data.map(item=>(
-                      <Tabs.Tab  key={item.id} value={item.id.toString()}>{item.name}</Tabs.Tab>
-                  ))}
+                    <Group position={'apart'}>
+                        <Tabs.Tab  key={item.id} value={item.id.toString()}>
+
+                            {item.name}
+
+                        </Tabs.Tab>
+                        {item.users.find(user=>user.id===userId) ?   <ActionIcon variant={'outline'} color={'red'} size={'xl'} onClick={()=>{
+                            leaveGroupMutation.mutate({userId,groupId:item.id})
+                        }}><TbMinus /></ActionIcon>:<ActionIcon size={'xl'} variant={'outline'} color={'green'} onClick={()=>{
+                            joinGroupMutation.mutate({userId,groupId:item.id})
+                        }}><TbPlus /></ActionIcon>}
+                    </Group>
+
+              ))}
 
               </Tabs.List>
               <Tabs.Panel value={activeGroup} mr={'xs'}>
@@ -168,16 +205,16 @@ const FilteredGroups = ({allGroups, activeGroup}) => {
     return filteredPosts.map(post => (<Card radius={'md'}>
         <Group>
             <Avatar
-                alt="Jacob Warnhalter"
+                alt={`${post.user.firstname} ${post.user.lastname}`}
                 radius="xl"
-                color={returnRandomColor()}
+                color={post.user.color} // Użyj koloru z danych użytkownika
             >
                 {post.user.firstname[0].toUpperCase()}
                 {post.user.lastname[0].toUpperCase()}
             </Avatar>
             <div>
                 <Text size="sm">{post.user.nickname}</Text>
-                <Text size="xs" c="dimmed">
+                <Text size="xs" color="dimmed">
                     {new Date(post.data).toLocaleString()}
                 </Text>
             </div>
@@ -186,9 +223,4 @@ const FilteredGroups = ({allGroups, activeGroup}) => {
             {post.content}
         </Text>
     </Card>))
-}
-
-const returnRandomColor = () => {
-    const colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'cyan', 'teal', 'gray', 'indigo'];
-    return colors[Math.floor(Math.random() * colors.length)];
 }

@@ -6,19 +6,19 @@ import * as IoIcons from 'react-icons/io';
 export const SidebarData = [
     {
         title: 'Home',
-        path: '/stronaglowna',
+        path: '/home',
         icon: <AiIcons.AiFillHome />,
         cName: 'nav-text'
     },
     {
         title: 'Grupy',
-        path: '/grupy',
+        path: '/group',
         icon: <IoIcons.IoIosPeople />,
         cName: 'nav-text'
     },
     {
         title: 'Konto',
-        path: '/konto',
+        path: '/account',
         icon: <IoIcons.IoIosPerson/>,
         cName: 'nav-text'
     },
@@ -30,13 +30,13 @@ export const SidebarData = [
     },
     {
         title: 'Mecze',
-        path: '/mecze',
+        path: '/games',
         icon: <IoIcons.IoIosBasketball/>,
         cName: 'nav-text'
     },
     {
         title: 'Dodawanie wiadomości',
-        path: '/dodajnews',
+        path: '/addnews',
         icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },

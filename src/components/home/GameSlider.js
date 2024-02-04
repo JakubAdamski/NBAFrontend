@@ -20,7 +20,7 @@ export const GameSlider = () => {
         const fetchGames = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/games');
-                setGames(response.data); // Użyj setGames() do aktualizacji stanu gier
+                setGames(response.data.content); // Użyj setGames() do aktualizacji stanu gier
             } catch (error) {
                 console.error('Error fetching games:', error);
             }

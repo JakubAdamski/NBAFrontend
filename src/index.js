@@ -12,7 +12,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <UserProvider>
-        <MantineProvider withGlobalStyles withNormalizeCSS>
+        <MantineProvider theme={{
+            fontFamily:'Poppins',
+        }} withGlobalStyles withNormalizeCSS>
             <App />
         </MantineProvider>
 

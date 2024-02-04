@@ -22,7 +22,7 @@ function Login() {
 
          if (response.data.token) {
             login(response.data.token);
-            navigate('/stronaglowna');
+            navigate('/home');
          } else {
             alert('Nieprawidłowy token lub brak tokenu w odpowiedzi');
          }
@@ -65,7 +65,7 @@ function Login() {
                </button>
 
                <p className="mt-3">
-                  Nie masz konta? <Link to="/rejestracja">Zarejestruj się</Link>
+                  Nie masz konta? <Link to="/registration">Zarejestruj się</Link>
                </p>
             </form>
          </div>
